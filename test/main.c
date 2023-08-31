@@ -2,6 +2,6 @@
 #include "../libs/bucket.h"
 
 int main(void) {
-    Bucket *b = bucket_new();
-    printf("%i", b->is_empty);
+    Bucket *b = bucket_new(5);
+    printf("%i, %i", b->len, b->capacity);
 }

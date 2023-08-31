@@ -1,10 +1,9 @@
-#include <stdbool.h>
 #include "key_value.h"
 
 typedef struct Bucket {
-    KeyValue value;
-    bool is_empty;
-    struct Bucket *next;
+    KeyValue *elements;
+    int len;
+    int capacity;
 } Bucket;
 
-Bucket *bucket_new(void);
+Bucket *bucket_new(int capacity);
