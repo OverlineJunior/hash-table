@@ -7,3 +7,5 @@ typedef struct Bucket {
 } Bucket;
 
 Bucket *bucket_new(int capacity);
+void bucket_push(Bucket *bucket, KeyValue kv);
+KeyValue bucket_get(Bucket *bucket, int index);

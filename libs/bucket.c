@@ -28,3 +28,22 @@ Bucket *bucket_new(int capacity) {
 
     return bucket;
 }
+
+void bucket_push(Bucket *bucket, KeyValue kv) {
+    if (bucket->len >= bucket->capacity) {
+        printf("Cannot exceed Bucket's capacity\n");
+        exit(EXIT_FAILURE);
+    }
+
+    bucket->elements[bucket->len] = kv;
+    bucket->len++;
+}
+
+KeyValue bucket_get(Bucket *bucket, int index) {
+    if (index >= bucket->len) {
+        printf("Index cannot exceed Bucket's length\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return bucket->elements[index];
+}
