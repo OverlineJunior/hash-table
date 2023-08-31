@@ -12,14 +12,14 @@ Bucket *bucket_new(int capacity) {
     Bucket *bucket = malloc(sizeof(Bucket));
 
     if (bucket == NULL) {
-        printf("Failed to allocate memory for Bucket");
+        printf("Failed to allocate memory for Bucket\n");
         exit(EXIT_FAILURE);
     }
 
     bucket->elements = malloc(capacity * sizeof(KeyValue));
 
     if (bucket->elements == NULL) {
-        printf("Failed to allocate memory for Bucket.elements");
+        printf("Failed to allocate memory for Bucket.elements\n");
         exit(EXIT_FAILURE);
     }
 
