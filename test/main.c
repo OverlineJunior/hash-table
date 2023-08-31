@@ -3,10 +3,10 @@
 
 int main(void) {
     HashTable ht = hashtable_new();
+
+    // Both keys have the same hash.
     hashtable_set(&ht, "12", 1);
     hashtable_set(&ht, "03", 2);
-
-    printf("%i  %i\n", hash("12"), hash("03"));
 
     printf(
         "[%s]: %i\n",

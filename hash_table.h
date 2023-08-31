@@ -3,8 +3,6 @@
 #define TABLE_SIZE 20
 #define KEY_SIZE 50
 
-int hash(char key[]);
-
 typedef struct {
     char key[KEY_SIZE];
     int value;
