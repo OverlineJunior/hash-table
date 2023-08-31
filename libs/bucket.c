@@ -47,3 +47,16 @@ KeyValue bucket_get(Bucket *bucket, int index) {
 
     return bucket->elements[index];
 }
+
+void bucket_remove(Bucket *bucket, int index) {
+    if (index >= bucket->len) {
+        printf("Index cannot exceed Bucket's length\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Shift down elements after the index.
+    for (int i = index; i < bucket->len; i++)
+        bucket->elements[i] = bucket->elements[i + 1];
+
+    bucket->len--;
+}
