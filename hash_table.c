@@ -23,3 +23,11 @@ HashTable hashtable_new() {
     HashTable ht = {};
     return ht;
 }
+
+void hashtable_set(HashTable *ht, char key[], int value) {
+    ht->table[hash(key)] = value;
+}
+
+int hashtable_get(HashTable ht, char key[]) {
+    return ht.table[hash(key)];
+}
