@@ -1,10 +1,7 @@
 #include <stdio.h>
-#include "../hash_table.h"
+#include "../libs/bucket.h"
 
 int main(void) {
-    HashTable table = hashtable_new();
-    hashtable_set(&table, "foo", 1);
-    hashtable_set(&table, "bar", 2);
-
-    printf("foo: %i, bar: %i\n", hashtable_get(table, "foo").value, hashtable_get(table, "bar").value);
+    Bucket *b = bucket_new();
+    printf("%i", b->is_empty);
 }
