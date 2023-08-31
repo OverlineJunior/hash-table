@@ -2,6 +2,8 @@
 #include "libs/maybe_int.h"
 
 #define TABLE_SIZE 20
+#define KEY_SIZE 50
+#define EMPTY_KEY "__EMPTY__"
 
 int ascii_sum(char str[]) {
     int sum = 0;
@@ -17,22 +19,51 @@ int hash(char key[]) {
 }
 
 typedef struct {
-    MaybeInt table[TABLE_SIZE];
+    char key[KEY_SIZE];
+    int value;
+} Entry;
+
+Entry entry_new(char key[], int value) {
+    Entry e;
+    e.value = value;
+    strcpy(e.key, key);
+
+    return e;
+}
+
+typedef struct {
+    Entry table[TABLE_SIZE][TABLE_SIZE];
+    int len;
 } HashTable;
 
-HashTable hashtable_new() {
+HashTable hashtable_new(void) {
     HashTable ht = {};
+    ht.len = 0;
 
+    // Initialize table with keys marked as empty to show availability later on.
     for (int i = 0; i < TABLE_SIZE; i++)
-        ht.table[i] = none();
+        for (int j = 0; j < TABLE_SIZE; j++)
+            ht.table[i][j] = entry_new(EMPTY_KEY, 0);
 
     return ht;
 }
 
 void hashtable_set(HashTable *ht, char key[], int value) {
-    ht->table[hash(key)] = some(value);
+    int bucket_i = hash(key);
+
+    for (int i = 0; i < TABLE_SIZE; i++)
+        if (strcmp(ht->table[bucket_i][i].key, EMPTY_KEY) == 0) {
+            ht->table[bucket_i][i] = entry_new(key, value);
+            break;
+        }
 }
 
 MaybeInt hashtable_get(HashTable ht, char key[]) {
-    return ht.table[hash(key)];
+    int bucket_i = hash(key);
+
+    for (int i = 0; i < TABLE_SIZE; i++)
+        if (strcmp(ht.table[bucket_i][i].key, key) == 0)
+            return some(ht.table[bucket_i][i].value);
+
+    return none();
 }

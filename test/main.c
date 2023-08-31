@@ -1,11 +1,22 @@
 #include <stdio.h>
-#include "../libs/bucket.h"
+#include "../hash_table.h"
 
 int main(void) {
-    Bucket *b = bucket_new(5);
-    bucket_push(b, keyvalue_new("A", 1));
-    bucket_push(b, keyvalue_new("B", 2));
-    bucket_remove(b, 0);
+    HashTable ht = hashtable_new();
+    hashtable_set(&ht, "12", 1);
+    hashtable_set(&ht, "03", 2);
 
-    printf("%i", bucket_get(b, 0).value);
+    printf("%i  %i\n", hash("12"), hash("03"));
+
+    printf(
+        "[%s]: %i\n",
+        "12",
+        hashtable_get(ht, "12").value
+    );
+
+    printf(
+        "[%s]: %i\n",
+        "03",
+        hashtable_get(ht, "03").value
+    );
 }
