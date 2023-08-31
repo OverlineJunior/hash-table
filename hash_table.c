@@ -1,4 +1,5 @@
 #include <string.h>
+#include "libs/maybe_int.h"
 
 #define TABLE_SIZE 20
 
@@ -16,18 +17,22 @@ int hash(char key[]) {
 }
 
 typedef struct {
-    int table[TABLE_SIZE];
+    MaybeInt table[TABLE_SIZE];
 } HashTable;
 
 HashTable hashtable_new() {
     HashTable ht = {};
+
+    for (int i = 0; i < TABLE_SIZE; i++)
+        ht.table[i] = none();
+
     return ht;
 }
 
 void hashtable_set(HashTable *ht, char key[], int value) {
-    ht->table[hash(key)] = value;
+    ht->table[hash(key)] = some(value);
 }
 
-int hashtable_get(HashTable ht, char key[]) {
+MaybeInt hashtable_get(HashTable ht, char key[]) {
     return ht.table[hash(key)];
 }

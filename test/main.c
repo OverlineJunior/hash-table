@@ -6,5 +6,5 @@ int main(void) {
     hashtable_set(&table, "foo", 1);
     hashtable_set(&table, "bar", 2);
 
-    printf("foo: %i, bar: %i\n", hashtable_get(table, "foo"), hashtable_get(table, "bar"));
+    printf("foo: %i, bar: %i\n", hashtable_get(table, "foo").value, hashtable_get(table, "bar").value);
 }
