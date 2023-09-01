@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string.h>
 #include "libs/maybe_int.h"
 
@@ -82,4 +83,15 @@ void hashtable_del(HashTable *ht, char key[]) {
             ht->table[bucket_i][i] = entry_new(EMPTY_KEY, 0);
             break;
         }
+}
+
+void hashtable_display(HashTable ht) {
+    printf("{\n");
+
+    for (int i = 0; i < TABLE_SIZE; i++)
+        for (int j = 0; j < TABLE_SIZE; j++)
+            if (strcmp(ht.table[i][j].key, EMPTY_KEY) != 0)
+                printf("    [%s]: %i\n", ht.table[i][j].key, ht.table[i][j].value);
+
+    printf("}\n");
 }

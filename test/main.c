@@ -4,7 +4,7 @@
 int main(void) {
     HashTable ht = hashtable_new();
     hashtable_set(&ht, "foo", 555);
-    hashtable_del(&ht, "foo");
-
-    printf("is_some: %i\n", hashtable_get(ht, "foo").is_some);
+    hashtable_set(&ht, "bar", 222);
+    hashtable_set(&ht, "baz", 333);
+    hashtable_display(ht);
 }
