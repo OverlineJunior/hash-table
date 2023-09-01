@@ -1,1 +1,1 @@
-Static HashMap<string, int> implementation in C.
+Static HashTable<string, int> implementation in C.
