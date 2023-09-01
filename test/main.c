@@ -6,17 +6,11 @@ int main(void) {
 
     // Both keys have the same hash.
     hashtable_set(&ht, "12", 1);
-    hashtable_set(&ht, "03", 2);
+    hashtable_set(&ht, "12", 2);
 
     printf(
         "[%s]: %i\n",
         "12",
         hashtable_get(ht, "12").value
-    );
-
-    printf(
-        "[%s]: %i\n",
-        "03",
-        hashtable_get(ht, "03").value
     );
 }

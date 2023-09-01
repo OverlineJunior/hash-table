@@ -48,16 +48,6 @@ HashTable hashtable_new(void) {
     return ht;
 }
 
-void hashtable_set(HashTable *ht, char key[], int value) {
-    int bucket_i = hash(key);
-
-    for (int i = 0; i < TABLE_SIZE; i++)
-        if (strcmp(ht->table[bucket_i][i].key, EMPTY_KEY) == 0) {
-            ht->table[bucket_i][i] = entry_new(key, value);
-            break;
-        }
-}
-
 MaybeInt hashtable_get(HashTable ht, char key[]) {
     int bucket_i = hash(key);
 
@@ -66,4 +56,20 @@ MaybeInt hashtable_get(HashTable ht, char key[]) {
             return some(ht.table[bucket_i][i].value);
 
     return none();
+}
+
+void hashtable_set(HashTable *ht, char key[], int value) {
+    int bucket_i = hash(key);
+    bool should_replace = hashtable_get(*ht, key).is_some;
+
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        bool can_set = should_replace
+            ? strcmp(ht->table[bucket_i][i].key, key) == 0
+            : strcmp(ht->table[bucket_i][i].key, EMPTY_KEY) == 0;
+
+        if (can_set) {
+            ht->table[bucket_i][i] = entry_new(key, value);
+            break;
+        }
+    }
 }
