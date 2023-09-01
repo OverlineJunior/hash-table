@@ -73,3 +73,13 @@ void hashtable_set(HashTable *ht, char key[], int value) {
         }
     }
 }
+
+void hashtable_del(HashTable *ht, char key[]) {
+    int bucket_i = hash(key);
+
+    for (int i = 0; i < TABLE_SIZE; i++)
+        if (strcmp(ht->table[bucket_i][i].key, key) == 0) {
+            ht->table[bucket_i][i] = entry_new(EMPTY_KEY, 0);
+            break;
+        }
+}

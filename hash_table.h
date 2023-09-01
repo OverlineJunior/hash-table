@@ -16,3 +16,4 @@ typedef struct {
 HashTable hashtable_new(void);
 void hashtable_set(HashTable *ht, char key[], int value);
 MaybeInt hashtable_get(HashTable ht, char key[]);
+void hashtable_del(HashTable *ht, char key[]);

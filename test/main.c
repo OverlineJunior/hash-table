@@ -3,14 +3,8 @@
 
 int main(void) {
     HashTable ht = hashtable_new();
+    hashtable_set(&ht, "foo", 555);
+    hashtable_del(&ht, "foo");
 
-    // Both keys have the same hash.
-    hashtable_set(&ht, "12", 1);
-    hashtable_set(&ht, "12", 2);
-
-    printf(
-        "[%s]: %i\n",
-        "12",
-        hashtable_get(ht, "12").value
-    );
+    printf("is_some: %i\n", hashtable_get(ht, "foo").is_some);
 }
