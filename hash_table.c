@@ -6,6 +6,7 @@
 #define KEY_SIZE 50
 #define EMPTY_KEY "__EMPTY__"
 
+// Returns the sum of the ASCII code of each char in str.
 int ascii_sum(char str[]) {
     int sum = 0;
 
@@ -37,6 +38,7 @@ typedef struct {
     int len;
 } HashTable;
 
+// Returns a new, empty HashTable.
 HashTable hashtable_new(void) {
     HashTable ht = {};
     ht.len = 0;
@@ -49,6 +51,7 @@ HashTable hashtable_new(void) {
     return ht;
 }
 
+// Returns the key's value if it exists, else none.
 MaybeInt hashtable_get(HashTable ht, char key[]) {
     int bucket_i = hash(key);
 
@@ -59,6 +62,7 @@ MaybeInt hashtable_get(HashTable ht, char key[]) {
     return none();
 }
 
+// Inserts a new key with a value. Replaces previous key with the same name.
 void hashtable_set(HashTable *ht, char key[], int value) {
     int bucket_i = hash(key);
     bool should_replace = hashtable_get(*ht, key).is_some;
@@ -75,6 +79,7 @@ void hashtable_set(HashTable *ht, char key[], int value) {
     }
 }
 
+// Removes a key.
 void hashtable_del(HashTable *ht, char key[]) {
     int bucket_i = hash(key);
 
@@ -85,6 +90,7 @@ void hashtable_del(HashTable *ht, char key[]) {
         }
 }
 
+// Displays each key value pairs.
 void hashtable_display(HashTable ht) {
     printf("{\n");
 
